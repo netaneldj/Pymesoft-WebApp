@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListaSistemasComponent implements OnInit {
   sistemas: string[];
   constructor() {
-    this.sistemas = ['Control de Personal','Liquidación de Sueldos','Gestión']
+    this.sistemas = ['Control de Personal','Liquidación de Sueldos','Gestión','Seguros']
    }
 
   ngOnInit(): void {
