@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Sistema } from '../models/sistema.model';
 
 @Component({
   selector: 'app-sistema',
@@ -6,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./sistema.component.css']
 })
 export class SistemaComponent implements OnInit {
-  @Input() nombre: string
+  @Input() sistema: Sistema
+  @HostBinding('attr.class') cssClass = 'col-md-4';
   constructor() { 
-    this.nombre = 'pymesoft'
   }
 
   ngOnInit(): void {

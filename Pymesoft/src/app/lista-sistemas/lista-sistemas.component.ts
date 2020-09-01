@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Sistema } from './../models/sistema.model';
 
 @Component({
   selector: 'app-lista-sistemas',
@@ -6,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-sistemas.component.css']
 })
 export class ListaSistemasComponent implements OnInit {
-  sistemas: string[];
+  sistemas: Sistema[];
   constructor() {
-    this.sistemas = ['Control de Personal','Liquidación de Sueldos','Gestión','Seguros']
+    this.sistemas = []
    }
 
   ngOnInit(): void {
+  }
+
+  guardar(nombre:string, url:string):boolean {
+    this.sistemas.push(new Sistema(nombre, url));
+    return false;
   }
 
 }
