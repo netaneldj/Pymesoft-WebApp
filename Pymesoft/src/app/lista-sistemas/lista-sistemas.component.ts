@@ -9,8 +9,16 @@ import { SistemasApiClient } from '../models/sistemas-api-client-model';
 })
 export class ListaSistemasComponent implements OnInit {
   @Output() onItemAdded:EventEmitter<Sistema>;
+  updates: string[];
+
   constructor(public sistemasApiClient:SistemasApiClient) {
     this.onItemAdded = new EventEmitter();
+    this.updates = [];
+    this.sistemasApiClient.subscribeOnChange((s: Sistema) => {
+      if (s!=null) {
+        this.updates.push('se ha elegido a '+s.nombre);
+      }
+    });
    }
 
   ngOnInit(): void {
@@ -22,8 +30,7 @@ export class ListaSistemasComponent implements OnInit {
   }
 
   elegido(s: Sistema) {
-    this.sistemasApiClient.getAll().forEach(x => x.setSelected(false));
-    s.setSelected(true); 
+    this.sistemasApiClient.elegir(s);
   }
 
 }
