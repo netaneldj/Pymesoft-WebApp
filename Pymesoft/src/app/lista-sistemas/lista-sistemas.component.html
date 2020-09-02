@@ -28,6 +28,11 @@
     <hr class="mb-5">
 
     <div class="row row-flex">
-        <app-sistema *ngFor="let s of sistemas" [sistema]="s"></app-sistema>
+        <app-sistema 
+            *ngFor="let s of sistemas; let i=index" 
+            [sistema]="s" 
+            [posicion]="i+1" 
+            (clicked)="elegido(s)"
+            ></app-sistema>
     </div>
 </div>

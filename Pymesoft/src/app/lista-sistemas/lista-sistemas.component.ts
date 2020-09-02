@@ -20,4 +20,9 @@ export class ListaSistemasComponent implements OnInit {
     return false;
   }
 
+  elegido(s: Sistema) {
+    this.sistemas.forEach(function (x) {x.setSelected(false);});
+    s.setSelected(true); 
+  }
+
 }

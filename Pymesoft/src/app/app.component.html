@@ -1,8 +1,15 @@
 <div class="container content">
+  <div class="page-header">
+    <div class="container">
+      <div class="navLinks">
+        <a [routerLink]="['./home']">Home</a>
+        <a [routerLink]="['./sistema']">Sistema</a>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <h1>{{ title }}</h1>
   </div>
-  <app-lista-sistemas></app-lista-sistemas>
+  <router-outlet></router-outlet>
 </div>
-
-<router-outlet></router-outlet>
