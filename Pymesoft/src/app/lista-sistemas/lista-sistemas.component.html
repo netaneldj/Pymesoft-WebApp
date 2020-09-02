@@ -20,10 +20,10 @@
 
     <div class="row">
         <app-sistema 
-            *ngFor="let s of sistemas; let i=index" 
+            *ngFor="let s of sistemasApiClient.getAll(); let i=index" 
             [sistema]="s" 
             [posicion]="i+1" 
-            (clicked)="elegido(s)"
+            (clicked)="elegido($event)"
             ></app-sistema>
     </div>
 </div>

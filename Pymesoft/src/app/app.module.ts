@@ -26,9 +26,9 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),    
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
   ],
   providers: [SistemasApiClient],
   bootstrap: [AppComponent]
