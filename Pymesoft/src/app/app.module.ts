@@ -1,17 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { ListaSistemasComponent } from './lista-sistemas/lista-sistemas.component';
 import { SistemaDetalleComponent } from './sistema-detalle/sistema-detalle.component';
+import { FormSistemaComponent } from './form-sistema/form-sistema.component';
+import { SistemasApiClient } from './models/sistemas-api-client-model';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'home', component: ListaSistemasComponent},  
-  { path: 'sistema', component: SistemaDetalleComponent}    
+  { path: 'sistema/:id', component: SistemaDetalleComponent}    
 ];
 
 @NgModule({
@@ -19,13 +21,16 @@ const routes: Routes = [
     AppComponent,
     SistemaComponent,
     ListaSistemasComponent,
-    SistemaDetalleComponent
+    SistemaDetalleComponent,
+    FormSistemaComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [],
+  providers: [SistemasApiClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

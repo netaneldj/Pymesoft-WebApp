@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sistema } from './../models/sistema.model';
+import { SistemasApiClient } from '../models/sistemas-api-client-model';
 
 @Component({
   selector: 'app-lista-sistemas',
@@ -7,21 +8,21 @@ import { Sistema } from './../models/sistema.model';
   styleUrls: ['./lista-sistemas.component.css']
 })
 export class ListaSistemasComponent implements OnInit {
-  sistemas: Sistema[];
-  constructor() {
-    this.sistemas = []
+  @Output() onItemAdded:EventEmitter<Sistema>;
+  constructor(public sistemasApiClient:SistemasApiClient) {
+    this.onItemAdded = new EventEmitter();
    }
 
   ngOnInit(): void {
   }
 
-  guardar(nombre:string, url:string):boolean {
-    this.sistemas.push(new Sistema(nombre, url));
-    return false;
+  agregado(s: Sistema) {
+    this.sistemasApiClient.add(s);
+    this.onItemAdded.emit(s);
   }
 
   elegido(s: Sistema) {
-    this.sistemas.forEach(function (x) {x.setSelected(false);});
+    this.sistemasApiClient.getAll().forEach(x => x.setSelected(false));
     s.setSelected(true); 
   }
 
