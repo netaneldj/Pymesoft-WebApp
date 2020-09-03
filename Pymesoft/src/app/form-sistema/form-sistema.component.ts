@@ -1,6 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Sistema } from '../models/sistema.model';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { fromEvent } from 'rxjs';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { ajax, AjaxResponse } from 'rxjs/ajax';
 
 @Component({
   selector: 'app-form-sistema',
@@ -11,6 +14,7 @@ export class FormSistemaComponent implements OnInit {
   @Output() onItemAdded: EventEmitter<Sistema>;
   fg: FormGroup;
   minLongitud = 3;
+  searchResults: string[];
 
   constructor(fb: FormBuilder) {
     this.onItemAdded = new EventEmitter();
@@ -27,6 +31,17 @@ export class FormSistemaComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    let elemNombre = <HTMLInputElement>document.getElementById('nombre');
+    fromEvent(elemNombre, 'input')
+      .pipe(
+        map((e: KeyboardEvent) => (e.target as HTMLInputElement).value),
+        filter(text => text.length > 2),
+        debounceTime(200),
+        distinctUntilChanged(),
+        switchMap(() => ajax('/assets/datos.json'))
+      ).subscribe(ajaxResponse => {
+        this.searchResults = ajaxResponse.response;
+      });
   }
 
   guardar(nombre: string, url: string) : boolean {

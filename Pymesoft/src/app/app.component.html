@@ -3,7 +3,6 @@
     <div class="container">
       <div class="navLinks">
         <a [routerLink]="['./home']">Home</a>
-        <a [routerLink]="['./sistema']">Sistema</a>
       </div>
     </div>
   </div>
@@ -13,3 +12,6 @@
   </div>
   <router-outlet></router-outlet>
 </div>
+
+<hr class="mb-5">
+Fecha: {{ time | async }}
