@@ -23,6 +23,7 @@ export class ListaSistemasComponent implements OnInit {
           this.updates.push('se ha elegido a '+s.nombre);
         }        
       });
+      //this.all = store.select(state => state.destinos.items).subscribe(items => this.all = items);
    }
 
   ngOnInit(): void {
@@ -31,12 +32,14 @@ export class ListaSistemasComponent implements OnInit {
   agregado(s: Sistema) {
     this.sistemasApiClient.add(s);
     this.onItemAdded.emit(s);
-    this.store.dispatch(new ElegidoFavoritoAction(s));    
   }
 
   elegido(s: Sistema) {
     this.sistemasApiClient.elegir(s);
-    this.store.dispatch(new ElegidoFavoritoAction(s));
+  }
+
+  getAll() {
+
   }
 
 }

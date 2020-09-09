@@ -1,30 +1,17 @@
 import { Sistema } from './sistema.model';
 import { Subject, BehaviorSubject } from 'rxjs';
+import { Store } from '@ngrx/store'
+import { AppState } from '../app.module';
+import { NuevoSistemaAction, ElegidoFavoritoAction } from './sistemas-state.model';
 
 export class SistemasApiClient {
-	sistemas: Sistema[];
-	current: Subject<Sistema> = new BehaviorSubject<Sistema>(null);
-	constructor() {
-       this.sistemas = [];
+	constructor(private store: Store<AppState>) {
 	}
 	add(s:Sistema){
-	  this.sistemas.push(s);
-	}
-	getAll(): Sistema[]{
-	  return this.sistemas;
-	}
-	
-	getById(id: string): Sistema{
-		return this.sistemas.filter(function(s){return s.id.toString() === id;})[0];
+		this.store.dispatch(new NuevoSistemaAction(s));
 	}
 
 	elegir(s: Sistema) {
-		this.sistemas.forEach(x => s.setSelected(false));
-		s.setSelected(true);
-		this.current.next(s);
-	}
-
-	subscribeOnChange(fn){
-		this.current.subscribe(fn);
+		this.store.dispatch(new ElegidoFavoritoAction(s));		
 	}
 }

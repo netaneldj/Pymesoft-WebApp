@@ -4,8 +4,8 @@ export class Sistema {
     private selected: boolean;
     public especificaciones: string[];
     id = uuid();
-
-    constructor(public nombre:string, public u:string) {
+    
+    constructor(public nombre:string, public u:string, public votes: number = 0) {
         this.especificaciones = ['Aplicación Multiusuario en Español','Sistema en red'];
     } 
     isSelected(): boolean {
@@ -14,4 +14,10 @@ export class Sistema {
     setSelected(s: boolean) {
         this.selected = s;
     }
+    voteUp(): any {
+        this.votes++;
+      }
+      voteDown(): any {
+        this.votes--;
+      }    
 }

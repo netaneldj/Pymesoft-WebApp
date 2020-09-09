@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { StoreModule as NgRxStoreModule, ActionReducerMap } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { SistemaComponent } from './sistema/sistema.component';
@@ -49,7 +50,7 @@ let reducersInitialState = {
     NgRxStoreModule.forRoot(reducers, { initialState: reducersInitialState }),
     EffectsModule.forRoot([SistemasEffects])
   ],
-  providers: [SistemasApiClient],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
