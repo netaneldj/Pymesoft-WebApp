@@ -1,2 +1,2 @@
-# Pymesoft-WebApp
+# PymesoftWebApp
 Pymesoft WebApp with Angular
